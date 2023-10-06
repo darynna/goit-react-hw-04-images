@@ -35,9 +35,15 @@ export function App (){
     if (category) {
       getImages();
     }
+
   }, [category, page])
 
-
+  useEffect(()=>{
+    if(totalPages === 1){
+      setButtonHidden(true)
+    }
+  }, [totalPages])
+  
 
   const handleSubmit=(e)=>{
     e.preventDefault()
