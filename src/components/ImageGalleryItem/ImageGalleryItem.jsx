@@ -1,22 +1,19 @@
-import { Component } from 'react';
+import {useState } from 'react';
 import '../styles.css';
 import { Modal } from 'components/Modal/Modal';
 
-export class ImageGalleryItem extends Component {
-  state = {
-    modal: false,
+export function ImageGalleryItem ({ id, image, alt, largeImage }) {
+  
+  const [modal, setModal] = useState(false)
+
+  const handleModalOpen = () => {
+    setModal(true)
   };
 
-  handleModalOpen = () => {
-    this.setState({ modal: true });
+  const handleModalClose = () => {
+     setModal(false)
   };
 
-  handleModalClose = () => {
-     this.setState({ modal: false });
-  };
-
-  render() {
-    const { id, image, alt, largeImage } = this.props;
     return (
       <>
         <li className="ImageGalleryItem" key={id}>
@@ -24,17 +21,16 @@ export class ImageGalleryItem extends Component {
             className="ImageGalleryItem-image"
             src={image}
             alt={alt}
-            onClick={this.handleModalOpen}
+            onClick={handleModalOpen}
           />
         </li>
-        {this.state.modal && (
+        {modal && (
           <Modal
             largeImage={largeImage}
             alt={alt}
-            onClose={this.handleModalClose}
+            onClose={handleModalClose}
           />
         )}
       </>
     );
-  }
 }
